@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.privilege.access.privilege.dao.IPermissionDao">
+	<select id="getLeaderLevel" parameterType="string" resultType="string">
+		SELECT X.X_EMPLOYEE_LEVEL
+		  FROM S_CONTACT C, S_CONTACT_X X, S_USER U
+		 WHERE C.ROW_ID = X.PAR_ROW_ID
+		   AND C.ROW_ID = U.PAR_ROW_ID
+		   AND U.LOGIN = #{EMPSHORNO}
+	</select>
+	
+	<select id="getPositionTypeList" parameterType="string" resultType="string">
+	   SELECT P.POSTN_TYPE_CD
+	     FROM S_POSTN P, S_USER U
+	    WHERE P.PR_EMP_ID = U.PAR_ROW_ID
+	      AND U.LOGIN = #{empShorNo}
+	</select>
+	<select id="getAuthorization" parameterType="map" resultType="int" >
+		SELECT COUNT(*) FROM CX_MCRM_MIS_SET S 
+		WHERE S.OBJECT_TYPE = #{infoType}
+		  AND POSITION_TYPE = #{positionType}	
+	</select>
+	<!-- 获取项目信息 -->
+	<select id="getProjectInfo" parameterType="object" resultMap="getProjectInfoMap">
+		  SELECT P.ROW_ID, P.PAR_PROJ_ID FROM S_PROJ P WHERE P.ROW_ID = #{PROJID}
+	</select>
+	<resultMap type="com.zte.mcrm.privilege.access.privilege.vo.ProjectVO" id="getProjectInfoMap">
+		<result column="ROW_ID" property="id"/>
+		<result column="PAR_PROJ_ID" property="parentId"/>
+	</resultMap>
+	<!-- 获取团队成员信息 -->
+	
+	<!-- 指委会成员,核心团队成员,专家团队成员 -->
+	<select id="getProjTeamInfo" parameterType="java.util.HashMap" resultType="int" >
+	  SELECT COUNT(*)
+	    FROM S_PROJ_RSRC R, CX_PROJ_RSRC_X X, S_USER U
+	   WHERE R.ROW_ID = X.PAR_ROW_ID
+	     AND R.EMP_ID = U.PAR_ROW_ID(+)
+	     <![CDATA[
+		     AND X.X_ACTIVE_FLG <> 'N'
+	     ]]>
+	     AND X.X_RSRC_TYPE IN ('24', '1', 'Professional Team')
+			 AND R.PROJ_ID = #{projId}
+	     AND U.LOGIN = #{empShorNo}
+	</select>
+	
+	
+</mapper>

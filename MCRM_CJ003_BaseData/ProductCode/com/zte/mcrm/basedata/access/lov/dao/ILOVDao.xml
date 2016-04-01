@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.basedata.access.lov.dao.LOVDao" >
+	<resultMap id="BaseResultMap" type="LOV" >
+		<result column="ROW_ID" property="rowId" jdbcType="VARCHAR" />
+		<result column="PAR_ROW_ID" property="parRowId" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" /> 
+		<result column="VAL" property="val" jdbcType="VARCHAR" />
+		<result column="lang_id" property="langId" jdbcType="VARCHAR" />
+		<result column="desc_text" property="descText" jdbcType="VARCHAR" />
+	</resultMap>
+  
+	<select id="getLOV"  resultMap="BaseResultMap">  
+	    SELECT type, val
+	      FROM S_LST_OF_VAL   
+	      WHERE lang_id = 'CHS' and ACTIVE_FLG = 'Y' and type IN    
+	     <foreach collection="list" item="lovTypes"  open="(" separator="," close=")">  
+	        #{lovTypes}  
+	     </foreach>
+	      order by ORDER_BY  
+	</select>
+	
+	<select id="getLOVByType" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT row_id,type, val ,name
+		FROM S_LST_OF_VAL
+		WHERE lang_id = #{lang} and ACTIVE_FLG = 'Y'
+		and type = #{type} 
+		order by name
+	</select>
+
+	<select id="getLOVByTypeAndName"  parameterType="LOV" resultMap="BaseResultMap">  
+	    SELECT *
+	      FROM S_LST_OF_VAL   
+	      WHERE lang_id = 'CHS' 
+	      and ACTIVE_FLG = 'Y' 
+	      and type = #{type} 
+	      and name = #{name}
+	</select>  
+	
+	<select id="getLOVsByTypeAndName"  parameterType="LOV" resultMap="BaseResultMap">  
+	    SELECT *
+	      FROM S_LST_OF_VAL   
+	      WHERE lang_id = 'CHS' 
+	      and ACTIVE_FLG = 'Y' 
+	      and type = #{type} 
+	      and name in (${name})
+	</select> 
+	
+	<select id="queryLOVByType"  parameterType="LOV" resultMap="BaseResultMap">  
+	    SELECT *
+	      FROM S_LST_OF_VAL   
+	      WHERE lang_id = 'CHS' 
+	      and ACTIVE_FLG = 'Y' 
+	      and type = #{type} 
+	</select>  
+
+	<select id="queryChildren"	parameterType="LOV" resultMap="BaseResultMap">
+		select * from  (
+				SELECT row_id,name,type, val,PAR_ROW_ID
+	      FROM S_LST_OF_VAL  
+	      WHERE lang_id = #{langId} and ACTIVE_FLG = 'Y' and type = #{type}
+	     <if test="rowId!= null and rowId!=''"><![CDATA[AND PAR_ROW_ID = #{rowId}]]></if> 
+	     order by name
+		)
+	</select>
+</mapper>

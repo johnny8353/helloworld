@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 开启使用开发模式，详细错误提示 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 将对象交给spring管理 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 指定资源编码类型 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 指定每次配置文件更改后，自动重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 设置上传文件大小最大50M -->
+	<constant name= "struts.multipart.maxSize" value="52428800" />
+	<!-- 国际化资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="content/Language" />
+	<!-- 默认后缀名 -->
+	<constant name="struts.action.extension" value="do,action,jhtml" />
+	<!-- Struts Annotation -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<constant name="struts.ui.theme" value="simple"></constant><!-- 设置主题，默认为xhtml -->
+	<constant name="struts.action.excludePattern" value="/login/*" />
+	<!-- Configuration for the default package. -->
+	<package name="global-package" extends="json-default">
+		<interceptors>   
+	        <!-- 定义拦截器 -->   
+	        <interceptor name="request" class="com.zte.mcrm.framework.common.interceptor.RequestInterceptor">
+	        	<param name="hello">userLogin</param>
+	        </interceptor>
+	        <!-- 定义一个包含自定义拦截器的拦截器栈 -->   
+	        <interceptor-stack name="mcrmInterceptorStack">
+	          <!-- 拦截器引用 -->
+	            <interceptor-ref name="request"/>
+	            <interceptor-ref name="defaultStack"/>
+	        </interceptor-stack>   
+	    </interceptors>   
+	    <!-- 设置全局默认的拦截器栈-->
+	    <default-interceptor-ref name="mcrmInterceptorStack" ></default-interceptor-ref>
+	    
+		<global-results>
+			<result name="input" >/error.jsp</result>
+			<result name="login" >/error.jsp</result>
+		</global-results>
+	</package>
+	<package name="jsonPack" extends="global-package">
+	</package>
+	<include file="struts_compsearch.xml"></include>
+    
+</struts>

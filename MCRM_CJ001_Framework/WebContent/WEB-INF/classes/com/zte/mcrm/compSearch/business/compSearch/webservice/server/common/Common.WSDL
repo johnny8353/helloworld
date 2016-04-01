@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://com.zte.siebel/commonWS" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://com.zte.siebel/commonWS" xmlns:intf="http://com.zte.siebel/commonWS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!-- by Johnny Huang 2016-01-07-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://com.zte.siebel/commonWS" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="WSServiceRequest">
+    <complexType>
+     <sequence>
+      <element name="jsonStr" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="WSServiceResponse">
+    <complexType>
+     <sequence>
+      <element name="returnStr" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="WSServiceResponse">
+      <wsdl:part element="impl:WSServiceResponse" name="parameters"/>
+   </wsdl:message>
+
+   <wsdl:message name="WSServiceRequest">
+      <wsdl:part element="impl:WSServiceRequest" name="parameters"/>
+   </wsdl:message>
+
+   <wsdl:portType name="commonWS">
+      <wsdl:operation name="WSService">
+         <wsdl:input message="impl:WSServiceRequest" name="WSServiceRequest"/>
+         <wsdl:output message="impl:WSServiceResponse" name="WSServiceResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+
+   <wsdl:binding name="commonWSSoapBinding" type="impl:commonWS">
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="WSService">
+         <wsdlsoap:operation soapAction="urn:WSService"/>
+         <wsdl:input name="WSServiceRequest">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="WSServiceResponse">
+            <wsdlsoap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="commonWS">
+      <wsdl:port binding="impl:commonWSSoapBinding" name="commonWS">
+         <wsdlsoap:address location="http://10.5.6.196:8088/siebel/services/commonWS"/>
+      </wsdl:port>
+   </wsdl:service>
+
+</wsdl:definitions>

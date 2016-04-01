@@ -1,0 +1,34 @@
+.new-tab {
+    background-image:url(../images/fam/new_tab.gif) !important;
+}
+
+.tabs {
+    background-image:url(../images/fam/tabs.gif ) !important;
+}
+
+.scroll {
+    background-image: url(../images/fam/arrow_switch.png) !important;
+}
+
+.list {
+    padding-left: 16px;
+    padding-bottom: 10px;
+}
+
+.list li{
+    list-style: square;
+    padding: 2px;
+}
+
+p {
+	margin:5px;
+}
+.settings {
+    background-image:url(../images/fam/folder_wrench.png);
+}
+.nav {
+    background-image:url(../images/fam/folder_go.png);
+}
+.info {
+    background-image:url(../images/fam/information.png);
+}

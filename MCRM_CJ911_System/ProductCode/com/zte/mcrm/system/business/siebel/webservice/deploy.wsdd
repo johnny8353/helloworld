@@ -1,0 +1,105 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AccountWS WSDL service -->
+
+  <service name="AccountWSPort" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://siebel.com/asi/"/>
+      <parameter name="wsdlServiceElement" value="AccountWS"/>
+      <parameter name="schemaQualified" value="http://www.siebel.com/xml/Account_EMR,http://siebel.com/asi/"/>
+      <parameter name="wsdlServicePort" value="AccountWSPort"/>
+      <parameter name="className" value="com.zte.mcrm.system.business.siebel.webservice.AccountWSPort_BindingImpl"/>
+      <parameter name="wsdlPortType" value="AccountWSPort"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="accountQueryPageMSO" qname="AccountQueryPageMSO" returnQName="retNS:AccountQueryPageMSO_Output" xmlns:retNS="http://siebel.com/asi/" returnType="rtns:>AccountQueryPageMSO_Output" xmlns:rtns="http://siebel.com/asi/" soapAction="document/http://siebel.com/asi/:AccountQueryPageMSO" >
+        <parameter qname="pns:AccountQueryPageMSO_Input" xmlns:pns="http://siebel.com/asi/" type="tns:>AccountQueryPageMSO_Input" xmlns:tns="http://siebel.com/asi/"/>
+      </operation>
+      <parameter name="allowedMethods" value="accountQueryPageMSO"/>
+
+      <typeMapping
+        xmlns:ns="http://siebel.com/asi/"
+        qname="ns:>AccountQueryPageMSO_Output"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.AccountQueryPageMSO_Output"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:RelatedContact"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedContact"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:ListOfRelatedServiceRequest"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedServiceRequest[]"
+        innerType="cmp-ns:RelatedServiceRequest" xmlns:cmp-ns="http://www.siebel.com/xml/Account_EMR"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:RelatedServiceRequest"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedServiceRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:ListOfRelatedContact"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedContact[]"
+        innerType="cmp-ns:RelatedContact" xmlns:cmp-ns="http://www.siebel.com/xml/Account_EMR"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:RelatedOpportunity"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedOpportunity"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:ListOfRelatedOpportunity"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.RelatedOpportunity[]"
+        innerType="cmp-ns:RelatedOpportunity" xmlns:cmp-ns="http://www.siebel.com/xml/Account_EMR"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://siebel.com/asi/"
+        qname="ns:>AccountQueryPageMSO_Input"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.AccountQueryPageMSO_Input"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:Account"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.Account"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://www.siebel.com/xml/Account_EMR"
+        qname="ns:ListOfAccount"
+        type="java:com.zte.mcrm.system.business.siebel.webservice.Account[]"
+        innerType="cmp-ns:Account" xmlns:cmp-ns="http://www.siebel.com/xml/Account_EMR"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

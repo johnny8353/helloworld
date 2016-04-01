@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<probes>
+  <probe id="p001001-002005" class="com.zte.mcrm.framework.common.run.McrmWebClientProbe" /> 
+</probes>
+

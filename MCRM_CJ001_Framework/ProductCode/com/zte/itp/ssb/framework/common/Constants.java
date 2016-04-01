@@ -1,0 +1,54 @@
+package com.zte.itp.ssb.framework.common;
+
+public abstract interface Constants
+{
+  public static final int COMMAND_ADD = 1;
+  public static final int COMMAND_EDIT = 2;
+  public static final int COMMAND_DELETE = 3;
+  public static final int COMMAND_QUERY = 4;
+  public static final int COMMAND_PAGING = 5;
+  public static final String ADD = "ADD";
+  public static final String EDIT = "EDIT";
+  public static final String UPDATE = "UPDATE";
+  public static final String DELETE = "DELETE";
+  public static final String QUERY = "QUERY";
+  public static final String IMPORTEXCEL = "IMPORTEXCEL";
+  public static final String EXPORTEXCEL = "EXPORTEXCEL";
+  public static final String PAGING = "PAGING";
+  public static final String INITIALIZE = "INITIALIZE";
+  public static final String GET_CONTROL_DATA = "GETCONTROLDATA";
+  public static final String INIT = "INIT";
+  public static final String GETENTITY = "GETENTITY";
+  public static final String DOMAIN_CALL_BACK = "CallBack";
+  public static final String COMMAND_NAME = "CommandName";
+  public static final String PAGE_NUM = "PageNum";
+  public static final String PAGE_SIZE = "PageSize";
+  public static final String CHECKBOX_CONDITION = "q";
+  public static final String CHECKBOX_LIMIT = "limit";
+  public static final int DEFAULT_LIMIT = 10;
+  public static final String SOURCE_ID = "SourceID";
+  public static final String EVENT_NAME = "CommandEvent";
+  public static final String COMMAND_CONTROL = "CommandControl";
+  public static final String DATABASE_ID = "ItpJdbcDataSourceConnection";
+  public static final String DROP_DOWN_ID = "Key";
+  public static final String CONTROL_ID = "ControlID";
+  public static final String DROP_DOWN_NAME = "Value";
+  public static final int DEFAULT_FETCH_SIZE = 10;
+  public static final int DEFAULT_START_PAGE = 1;
+  public static final String DEFAULT_FETCHSIZE = "10";
+  public static final String DEFAULT_RANGESTART = "1";
+  public static final String PRINT_DISPLAY_JSON_INFO = "页面传递过来的JSON信息: ";
+  public static final String REQUEST_PARAM_NO_EXISTS_INFO = "request请求中无任何参数";
+  public static final String REQUEST_ATTR_NO_EXISTS_INFO = "request请求无任何属性attr";
+  public static final String SESSION_ATTR_NO_EXISTS_INFO = "session中无任何属性attr";
+  public static final String PRINT_PARSE_PARAM_FROM_REQUEST_ERROR = "request请求中解析参数param发生异常,异常信息:";
+  public static final String PRINT_PARSE_ATTR_FROM_REQUEST_ERROR = "request请求中解析属性attr发生异常,异常信息:";
+  public static final String PRINT_PARSE_ATTR_FROM_SESSION_ERROR = "会话中解析请求属性attr发生异常,异常信息:";
+  public static final String PARAM_NULL_ERROR = "parameterName(参数名称)为null.";
+  public static final String ATTR_NULL_ERROR = "属性名称为null.";
+  public static final String ATTR_ERROR = "根据属性名称从request中取出属性值发生异常,异常信息:";
+  public static final String PARAM_ERROR = "parameterName(参数名称)为null.";
+  public static final String COMMAND_NAME_INFO = "当前的请求命令(commandName)为: ";
+  public static final String JSON_SERVICE_NAME = "分发的JSON服务名称为: ";
+  public static final String REQ_URL = "jssb已接收请求,其URL为: ";
+}

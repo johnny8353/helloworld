@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CapabilityDatas>
+    <!-- Data 性能数据条目，一次可以返回多种类型的数据 -->
+    <!--   @watchobj_id     监控对象ID  ()
+           @watchobj_type   监控对象类别 (监控什么对象 , 系统，CPU 或其他 ?IM 系统, DotNet B/S 系统，DotNet C/S 系统, Java B/S 系统)
+           @watchtype       监控类别编码 (如: 001001 应用可用性，CPU 利用率，硬盘空间) (监控该对象的什么性能 ?)
+           @errorno 错误编号， 
+           @errormsg 错误消息
+           
+           innertext 返回监控结果数据
+           
+           	// 可用(应用正常)
+	        USABLE = "003001";
+              服务应用错误 = "003002"
+              探针不存在  = "003004"
+     -->
+  	<Data watchobj_id="1" watchobj_type="003001" watch_type="001001" errorno="" >
+  	  <result>001001</result>
+  	  <errormsg></errormsg>
+  	</Data>
+</CapabilityDatas>

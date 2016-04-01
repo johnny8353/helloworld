@@ -1,0 +1,45 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from commonWS WSDL service -->
+
+  <service name="commonWS" provider="java:RPC" style="document" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://com.zte.siebel/commonWS"/>
+      <parameter name="wsdlServiceElement" value="commonWS"/>
+      <parameter name="schemaQualified" value="http://com.zte.siebel/commonWS"/>
+      <parameter name="wsdlServicePort" value="commonWS"/>
+      <parameter name="className" value="com.zte.mcrm.compSearch.business.compSearch.webservice.server.common.CommonWSSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="commonWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="WSService" qname="WSService" returnQName="retNS:WSServiceResponse" xmlns:retNS="http://com.zte.siebel/commonWS" returnType="rtns:>WSServiceResponse" xmlns:rtns="http://com.zte.siebel/commonWS" soapAction="urn:WSService" >
+        <parameter qname="pns:WSServiceRequest" xmlns:pns="http://com.zte.siebel/commonWS" type="tns:>WSServiceRequest" xmlns:tns="http://com.zte.siebel/commonWS"/>
+      </operation>
+      <parameter name="allowedMethods" value="WSService"/>
+
+      <typeMapping
+        xmlns:ns="http://com.zte.siebel/commonWS"
+        qname="ns:>WSServiceRequest"
+        type="java:com.zte.mcrm.compSearch.business.compSearch.webservice.server.common.WSServiceRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://com.zte.siebel/commonWS"
+        qname="ns:>WSServiceResponse"
+        type="java:com.zte.mcrm.compSearch.business.compSearch.webservice.server.common.WSServiceResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

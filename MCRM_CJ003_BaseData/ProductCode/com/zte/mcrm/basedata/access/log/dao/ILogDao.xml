@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.basedata.access.log.dao.ILogDao">
+	<!-- 记录和实体映射配置 -->
+	<resultMap id="getEmployeeInfoMap" type="com.zte.mcrm.basedata.access.log.vo.LogVO">
+		<result column="ROW_ID" property="rowId" javaType="java.lang.Long" jdbcType="INTEGER" />
+	</resultMap>
+	<insert id="insert" parameterType="com.zte.mcrm.basedata.access.log.vo.LogVO">
+		<selectKey resultType="java.lang.Long" order="BEFORE"
+			keyProperty="rowId">
+			SELECT siebel.S_SEQUENCE_S.NEXTVAL FROM DUAL 
+		</selectKey>
+		INSERT INTO SIEBEL.CX_TIME_LOG (
+		row_id,
+		DB_LAST_UPD_SRC,
+		LAST_UPD_BY,
+		CREATED_BY,
+		ATT05,
+		METHOD,
+		DESCS,
+		TYPE,
+		INV_USER,
+		SPEND_TIME,
+		ATT02,
+		ATT01,
+		NAME,
+		ATT03)
+		VALUES (#{rowId},'USER', '0-1', '0-1',#{ATT05},
+		#{METHOD}, #{DESCS}, 'J2EE', #{INV_USER},#{SPEND_TIME}, #{ATT02},
+		#{ATT01},#{NAME},#{ATT03})
+	</insert>
+	
+	 <update id="modify" parameterType="com.zte.mcrm.basedata.access.log.vo.LogVO" > 
+		update SIEBEL.CX_TIME_LOG set 
+			ATT05=#{ATT05},
+			ATT01=#{ATT01},
+			ATT02=#{ATT02},
+			ATT03=#{ATT03},
+			METHOD=#{METHOD},
+			INV_USER= #{INV_USER},
+			NAME=#{NAME},
+			SPEND_TIME=#{SPEND_TIME}
+		where ROW_ID = #{ROW_ID}
+	</update>
+</mapper>

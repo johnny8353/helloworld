@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.framework.access.framework.dao.IUnitTestParamsDAO">
+	  <!-- 记录和实体映射配置 -->
+	  <resultMap id="searchAllParamsMap" type="com.zte.mcrm.framework.access.framework.vo.UnitTestParamsVO">
+			<id     column="ROW_ID" 		        property="id" 	            jdbcType="VARCHAR"/>
+			<result column="BEAN_KEY"    		property="beanKey"         	jdbcType="VARCHAR"/>	
+			<result column="BEAN_DESC" 		    property="beanDesc"      	jdbcType="VARCHAR"/>	
+			<result column="METHOD_KEY" 		property="methodKey"      	jdbcType="VARCHAR"/>	
+			<result column="METHOD_DESC"  		property="methodDesc"       jdbcType="VARCHAR"/>
+			<result column="TEST_SCENE_DESC" 	property="testSceneDesc"    jdbcType="VARCHAR"/>
+			<result column="JSON_PARAMS"  		property="jsonParams"       jdbcType="VARCHAR"/>
+			<result column="FUNC_PASS_VAL" 	    property="funcPassVal"      jdbcType="VARCHAR"/>
+			<result column="PERF_PASS_KEY" 		property="perfPassKey" 		jdbcType="VARCHAR"/>
+			<result column="METHOD_EXEC_TIME" 	property="methodExecTime" 	jdbcType="DOUBLE"/>
+			<result column="MEMO" 				property="memo" 			jdbcType="DOUBLE"/>
+			<result column="TEST_RESULT" 	    property="testResult" 	    jdbcType="VARCHAR"/>
+			<result column="ENCODING_BY" 		property="encodingBy" 		jdbcType="VARCHAR"/>
+			<result column="ENABLE_FLAG" 		property="enableFlag" 		jdbcType="VARCHAR"/>
+			<result column="CREATED_BY" 		property="createdBy" 		jdbcType="VARCHAR"/>
+			<result column="CREATED" 		property="createdDate" 		jdbcType="VARCHAR"/>
+			<result column="LAST_UPD_BY" 	property="lastUpdatedBy" 	jdbcType="VARCHAR"/>
+			<result column="LAST_UPD" 	property="lastUpdatedDate" 	jdbcType="VARCHAR"/>
+			<result column="TEST_RESULT_DESC" 	property="testResultDesc" 	jdbcType="VARCHAR"/>
+			<result column="COMP_TYPE" 	        property="compType" 	    jdbcType="VARCHAR"/>
+			<result column="FAIL_TYPE" 	        property="failType" 	    jdbcType="VARCHAR"/>
+			
+
+	  </resultMap>
+
+    <select id="searchAllParams" parameterType="java.lang.String" resultMap="searchAllParamsMap">
+		SELECT 
+			ROW_ID,
+			BEAN_KEY,
+			BEAN_DESC,
+			METHOD_KEY,
+			METHOD_DESC,
+			TEST_SCENE_DESC,
+			JSON_PARAMS,
+			FUNC_PASS_VAL,
+			PERF_PASS_KEY,
+			METHOD_EXEC_TIME,
+            TEST_RESULT,
+			ENCODING_BY,
+			ENABLE_FLAG,
+			CREATED_BY,
+			CREATED,
+			LAST_UPD_BY,
+			LAST_UPD,
+            TEST_RESULT_DESC,
+			COMP_TYPE,
+			FAIL_TYPE
+		FROM SIEBEL.CX_JV_TEST_PAM U
+		WHERE U.ENABLE_FLAG='Y' 
+		<if test="_parameter != null">
+             AND U.TEST_TYPE=#{_parameter,jdbcType=VARCHAR}
+       </if>
+		ORDER BY TEST_RESULT,TEST_RESULT_DESC,METHOD_EXEC_TIME DESC,U.BEAN_KEY,U.METHOD_KEY
+    </select>
+    <update id="updateList" parameterType="java.util.List">
+    	<!-- mysql不需要begin end； -->
+        <foreach collection="list" item="item" index="index" open="begin" close="end;" separator="">
+			UPDATE SIEBEL.CX_JV_TEST_PAM
+			<set>
+				MEMO = nvl(MEMO,0)+METHOD_EXEC_TIME,
+			    METHOD_EXEC_TIME=#{item.methodExecTime,jdbcType=DOUBLE},
+			    TEST_RESULT=#{item.testResult,jdbcType=VARCHAR},
+			    TEST_RESULT_DESC=#{item.testResultDesc,jdbcType=VARCHAR},
+			    LAST_UPD=sysdate,
+			    FAIL_TYPE=#{item.failType,jdbcType=VARCHAR}
+			</set>
+			WHERE ROW_ID=#{item.id,jdbcType=VARCHAR};
+			
+		</foreach> 
+	</update>
+	
+	
+	<!-- 按beanId和testType更新记录 -->
+	<update id="updateByBeanId" parameterType="com.zte.mcrm.framework.access.framework.vo.UnitTestParamsVO">
+		UPDATE SIEBEL.CX_JV_TEST_PAM
+	    SET METHOD_EXEC_TIME=#{methodExecTime,jdbcType=DOUBLE}
+		    ,TEST_RESULT=#{testResult,jdbcType=VARCHAR}
+		    ,LAST_UPD=sysdate
+		    ,TEST_RESULT_DESC=#{testResultDesc,jdbcType=VARCHAR}
+		    ,FAIL_TYPE=#{failType,jdbcType=VARCHAR}
+	    WHERE ENABLE_FLAG='Y'
+	      AND TEST_TYPE=#{testType,jdbcType=VARCHAR} 
+	      AND BEAN_KEY=#{beanKey,jdbcType=VARCHAR}
+	</update>
+	<select id="getUnitTestParamsByBeanKey" parameterType="java.lang.String" resultMap="searchAllParamsMap">
+		SELECT 
+			ROW_ID,
+			BEAN_KEY,
+			BEAN_DESC,
+			METHOD_KEY,
+			METHOD_DESC,
+			TEST_SCENE_DESC,
+			JSON_PARAMS,
+			FUNC_PASS_VAL,
+			PERF_PASS_KEY,
+			METHOD_EXEC_TIME,
+            TEST_RESULT,
+			ENCODING_BY,
+			ENABLE_FLAG,
+			CREATED_BY,
+			CREATED,
+			LAST_UPD_BY,
+			LAST_UPD,
+            TEST_RESULT_DESC,
+			COMP_TYPE,
+			FAIL_TYPE
+		FROM SIEBEL.CX_JV_TEST_PAM U
+		WHERE U.ENABLE_FLAG='Y' AND U.BEAN_KEY=#{beanKey,jdbcType=VARCHAR}
+		ORDER BY U.BEAN_KEY,U.METHOD_KEY
+    </select>
+	
+</mapper>

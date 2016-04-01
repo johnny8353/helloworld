@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.basedata.access.employee.dao.IEmployeeInfoDAO">
+	<!-- 记录和实体映射配置 -->
+	<resultMap id="getEmployeeInfoMap" type="com.zte.mcrm.basedata.model.employee.EmployeeInfoBO">
+		<result column="ID" 	  					property="employeeInfoVo.id" 					jdbcType="VARCHAR"/>
+		<result column="EMPLOYEE_NUM14" 	  		property="employeeInfoVo.employeeNum14" 		jdbcType="VARCHAR"/>
+		<result column="EMPLOYEE_NUM8" 	  			property="employeeInfoVo.employeeNum8" 			jdbcType="VARCHAR"/>
+		<result column="EMPLOYMENT_STATUS" 	  		property="employeeInfoVo.employmentStatus" 		jdbcType="VARCHAR"/>
+		<result column="FIRST_NAME" 	  			property="employeeInfoVo.firstName" 			jdbcType="VARCHAR"/>
+		<result column="INTEGRATION_ID" 	  		property="employeeInfoVo.integrationId" 		jdbcType="VARCHAR"/>
+		<result column="LAST_NAME" 	  				property="employeeInfoVo.lastName" 				jdbcType="VARCHAR"/>
+		<result column="ZTE_ORGANIZATION_ID" 	  	property="employeeInfoVo.zTEOrganizationId" 	jdbcType="VARCHAR"/>
+		<result column="ORGANIZATION_NUMBER" 	  	property="deptInfoVO.organizationNumber" 		jdbcType="VARCHAR"/>
+		<result column="ZTE_ORG_CHS_NAME" 	  		property="deptInfoVO.zTEOrgCHSName" 			jdbcType="VARCHAR"/>
+		<result column="ZTE_ORG_ENU_NAME" 	  		property="deptInfoVO.zTEOrgENUName" 			jdbcType="VARCHAR"/>
+		<result column="HR_ORG_NAME_PATH" 	  		property="deptInfoVO.hROrgNamePath" 			jdbcType="VARCHAR"/>
+		<result column="HR_ORG_NAME_PATH_ENU" 	  	property="deptInfoVO.hROrgNamePathEnu" 			jdbcType="VARCHAR"/>
+	</resultMap>
+    <select id="getEmployeeInfo" parameterType="com.zte.mcrm.basedata.access.employee.vo.EmployeeInfoVO" resultMap="getEmployeeInfoMap"> 
+		SELECT
+		E.ID,
+		E.EMPLOYEE_NUM14,
+		E.EMPLOYEE_NUM8,
+		E.EMPLOYMENT_STATUS,
+		E.FIRST_NAME,
+		E.INTEGRATION_ID,
+		E.LAST_NAME,
+		E.ZTE_ORGANIZATION_ID,
+		D.ORGANIZATION_NUMBER,
+		D.ZTE_ORG_CHS_NAME,
+		D.ZTE_ORG_ENU_NAME,
+		D.HR_ORG_NAME_PATH,
+		'' HR_ORG_NAME_PATH_ENU
+		FROM mcrm_data.employee_info E
+		INNER JOIN MCRM_DATA.DEPT_INFO D ON E.ZTE_ORGANIZATION_ID = D.ID 
+		WHERE  E.EMPLOYEE_NUM8=#{employeeNum8,jdbcType=VARCHAR}
+		AND e.EMPLOYMENT_STATUS='Y'
+    </select>
+</mapper>

@@ -1,0 +1,186 @@
+.banner {
+	POSITION: relative; WIDTH: 100%; HEIGHT: 420px; OVERFLOW: hidden
+}
+.banner .show {
+	POSITION: absolute; WIDTH: 1920px; HEIGHT: 420px; MARGIN-LEFT: -960px; OVERFLOW: hidden; TOP: 0px; LEFT: 50%
+}
+.banner .show UL {
+	POSITION: relative; WIDTH: 1920px; FLOAT: left; HEIGHT: 420px; OVERFLOW: hidden
+}
+.banner .show UL LI {
+	POSITION: absolute; TEXT-ALIGN: center; WIDTH: 1920px; FLOAT: left; HEIGHT: 420px
+}
+.banner .focus {
+	POSITION: absolute; PADDING-LEFT: 10px; WIDTH: 120px; BOTTOM: 0px; BACKGROUND: url(bor02.png) no-repeat left center; HEIGHT: 29px; RIGHT: 0px; PADDING-TOP: 13px
+}
+.banner .focus A {
+	WIDTH: 14px; DISPLAY: inline-block; BACKGROUND: url(ico01.png) no-repeat left -24px; FLOAT: left; HEIGHT: 14px; MARGIN-LEFT: 10px
+}
+.banner .focus A.on {
+	BACKGROUND: url(ico01.png) no-repeat left top
+}
+.hot {
+	Z-INDEX: 2; POSITION: absolute; LINE-HEIGHT: 42px; WIDTH: 100%; BOTTOM: 0px; BACKGROUND: url(bg03.png) repeat-x; HEIGHT: 42px
+}
+.hot .list {
+	POSITION: relative; PADDING-LEFT: 10px; WIDTH: 860px; FLOAT: left; HEIGHT: 42px
+}
+.hot .list .prev {
+	POSITION: absolute; WIDTH: 18px; DISPLAY: block; BACKGROUND-POSITION: -42px -108px; HEIGHT: 15px; TOP: 13px; LEFT: 80px
+}
+.hot .list .box_btn {
+	POSITION: absolute; WIDTH: 18px; DISPLAY: block; BACKGROUND-POSITION: -61px -108px; HEIGHT: 15px; TOP: 13px; LEFT: 99px
+}
+.hot .list .next {
+	POSITION: absolute; WIDTH: 18px; DISPLAY: block; BACKGROUND-POSITION: -80px -108px; HEIGHT: 15px; TOP: 13px; LEFT: 118px
+}
+.hot .list H2.tit {
+	WIDTH: 145px; FLOAT: left; FONT-SIZE: 16px
+}
+.hot .list A {
+	COLOR: #000000
+}
+.hot .list A:hover {
+	COLOR: #f08300
+}
+.hot .list DIV {
+	POSITION: relative; WIDTH: 700px; FLOAT: left; HEIGHT: 42px; OVERFLOW: hidden
+}
+.hot .list DIV UL {
+	POSITION: absolute; WIDTH: 700px
+}
+.hot .list DIV UL LI EM {
+	COLOR: #909090
+}
+.news-show {
+	Z-INDEX: 3; POSITION: absolute; PADDING-LEFT: 30px; WIDTH: 968px; BACKGROUND: url(bg14.png) no-repeat; HEIGHT: 202px; MARGIN-LEFT: -499px; TOP: 430px; LEFT: 50%
+}
+.news-show SPAN {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 291px; PADDING-RIGHT: 23px; FLOAT: left; PADDING-TOP: 19px
+}
+.news-show SPAN IMG {
+	BORDER-BOTTOM: #d5d5d5 1px solid; BORDER-LEFT: #d5d5d5 1px solid; BORDER-TOP: #d5d5d5 1px solid; BORDER-RIGHT: #d5d5d5 1px solid
+}
+.news-show UL {
+	WIDTH: 584px; FLOAT: left; PADDING-TOP: 10px
+}
+.news-show UL LI {
+	BORDER-BOTTOM: #44b7e3 1px solid; LINE-HEIGHT: 35px; FONT-FAMILY: 'Arial'; COLOR: #d1d2d2
+}
+.news-show UL LI A {
+	COLOR: #fff
+}
+.news-show .close-btn {
+	MARGIN-TOP: 10px; WIDTH: 32px; DISPLAY: inline-block; FLOAT: left; HEIGHT: 32px; MARGIN-LEFT: 18px
+}
+.index-area {
+	POSITION: relative; PADDING-BOTTOM: 40px; PADDING-LEFT: 10px; WIDTH: 980px; OVERFLOW: hidden; PADDING-TOP: 29px
+}
+.index-area UL {
+	WIDTH: 1100px; FLOAT: left
+}
+.index-area UL LI {
+	PADDING-BOTTOM: 4px; PADDING-LEFT: 3px; WIDTH: 312px; PADDING-RIGHT: 3px; MARGIN-BOTTOM: 13px; BACKGROUND: url(bg03.gif); FLOAT: left; HEIGHT: 110px; MARGIN-RIGHT: 10px; PADDING-TOP: 4px
+}
+.index-area UL LI A {
+	WIDTH: 100%; DISPLAY: block; HEIGHT: 110px
+}
+.index-area UL LI SPAN {
+	WIDTH: 110px; FLOAT: left; HEIGHT: 108px
+}
+.index-area UL LI H2 {
+	PADDING-LEFT: 17px; WIDTH: 180px; FONT-FAMILY: "Microsoft Yahei"; FLOAT: left; COLOR: #f08300; FONT-SIZE: 18px; PADDING-TOP: 15px
+}
+.index-area UL LI P {
+	PADDING-LEFT: 17px; WIDTH: 180px; FLOAT: left; PADDING-TOP: 10px
+}
+.index-area {
+	POSITION: relative; PADDING-BOTTOM: 40px; PADDING-LEFT: 10px; WIDTH: 980px; OVERFLOW: hidden; PADDING-TOP: 29px
+}
+.index-area UL {
+	WIDTH: 1100px; FLOAT: left
+}
+.index-area UL DL {
+	PADDING-BOTTOM: 4px; PADDING-LEFT: 3px; WIDTH: 318px; PADDING-RIGHT: 3px; MARGIN-BOTTOM: 13px; FLOAT: left; HEIGHT: 160px; MARGIN-RIGHT: 5px; PADDING-TOP: 4px
+}
+.index-area UL DL DT {
+	WIDTH: 318px; BACKGROUND: url(bg03.gif); HEIGHT: 118px
+}
+.index-area UL DL DT A {
+	WIDTH: 100%; DISPLAY: block; HEIGHT: 110px
+}
+.index-area UL DL DT SPAN {
+	MARGIN: 4px; WIDTH: 110px; FLOAT: left; HEIGHT: 108px
+}
+.index-area UL DL DT H2 {
+	PADDING-LEFT: 17px; WIDTH: 180px; FONT-FAMILY: "Microsoft Yahei"; FLOAT: left; COLOR: #f08300; FONT-SIZE: 18px; PADDING-TOP: 15px
+}
+.index-area UL DL DD {
+	PADDING-BOTTOM: 15px; PADDING-LEFT: 5px; WIDTH: 305px; PADDING-RIGHT: 5px; FLOAT: left; PADDING-TOP: 1px
+}
+#login_div {
+	WIDTH: 413px; BACKGROUND: url(login_bg.gif) no-repeat left top; HEIGHT: 248px
+}
+.lg_close {
+	MARGIN-TOP: 8px; WIDTH: 24px; FLOAT: right; HEIGHT: 23px; MARGIN-RIGHT: 11px
+}
+.lg_close IMG {
+	CURSOR: pointer
+}
+#login_div .title {
+	HEIGHT: 37px
+}
+.title_t {
+	TEXT-ALIGN: left; LINE-HEIGHT: 37px; PADDING-LEFT: 17px; WIDTH: 200px; FLOAT: left; HEIGHT: 37px; COLOR: #5d5d5d; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+#login_div .cotntent {
+	MARGIN-TOP: 12px; WIDTH: 335px; DISPLAY: inline; HEIGHT: 168px; MARGIN-LEFT: 73px
+}
+.tb_login {
+	BORDER-RIGHT-WIDTH: 0px; MARGIN-TOP: 20px; WIDTH: 100%; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px
+}
+.tb_login TD {
+	TEXT-ALIGN: left; LINE-HEIGHT: 40px; HEIGHT: 40px
+}
+.tb_login .tr_btn TD {
+	PADDING-TOP: 0px
+}
+.tb_login TD.title {
+	TEXT-ALIGN: right; PADDING-RIGHT: 10px; COLOR: #616265
+}
+.wrong_tips TD {
+	LINE-HEIGHT: 20px; HEIGHT: 20px; COLOR: #ff0000
+}
+.lg_txt {
+	BORDER-BOTTOM: #9fb0c2 1px solid; BORDER-LEFT: #9fb0c2 1px solid; LINE-HEIGHT: 25px; PADDING-LEFT: 3px; WIDTH: 183px; HEIGHT: 25px; BORDER-TOP: #9fb0c2 1px solid; BORDER-RIGHT: #9fb0c2 1px solid
+}
+A.lg_check {
+	COLOR: #ff9900
+}
+A.lg_btn:link {
+	TEXT-ALIGN: center; LINE-HEIGHT: 26px; WIDTH: 58px; DISPLAY: block; BACKGROUND: url(btn_bg.gif) no-repeat left top; FLOAT: left; HEIGHT: 26px; COLOR: #000; MARGIN-RIGHT: 5px; TEXT-DECORATION: none
+}
+A.lg_btn:visited {
+	TEXT-ALIGN: center; LINE-HEIGHT: 26px; WIDTH: 58px; DISPLAY: block; BACKGROUND: url(btn_bg.gif) no-repeat left top; FLOAT: left; HEIGHT: 26px; COLOR: #000; MARGIN-RIGHT: 5px; TEXT-DECORATION: none
+}
+A.lg_btn:hover {
+	BACKGROUND: url(btn_bg_hover.gif) no-repeat left top
+}
+A.lg_btn:unknown {
+	BACKGROUND: url(btn_bg_hover.gif) no-repeat left top
+}
+A.lg_link {
+	COLOR: #5785b8; TEXT-DECORATION: none
+}
+A.lg_link:hover {
+	TEXT-DECORATION: underline
+}
+.lg_tips {
+	TEXT-ALIGN: center; LINE-HEIGHT: 20px; HEIGHT: 20px; COLOR: #616265; CLEAR: both; PADDING-TOP: 15px
+}
+BUTTON {
+	BORDER-RIGHT-WIDTH: 0px; FONT-FAMILY: Arial, Helvetica, sans-serif,"ËÎÌו"; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; MARGIN-LEFT: 10px; FONT-SIZE: 12px; BORDER-LEFT-WIDTH: 0px; CURSOR: pointer
+}
+.btn_l {
+	TEXT-ALIGN: center; LINE-HEIGHT: 26px; WIDTH: 75px; BACKGROUND: url(btn_bg_l.gif) no-repeat left top; HEIGHT: 26px; COLOR: #000; MARGIN-RIGHT: 5px
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zte.mcrm.project.access.projweekreportlist.dao.IProjWeekReportListDao">
+	<!-- 根据页大小,当前页,员工id,项目id,语言标识,权限标识 获取周报数量 -->
+	<select id="getProjWeekReportListNum" parameterType="map" resultType="int">
+		SELECT COUNT(1)
+		  FROM CX_PJ_WK_REPORT R, S_PROJ P
+		 WHERE R.PROJECT_ID = P.ROW_ID
+		   AND R.ACTIVE_FLAG = 'Y'
+		   AND R.PROJECT_ID = #{prjId}
+		   <if test="permission !='readable'">
+			   AND #{empId} IN
+			       (SELECT EMP_ID FROM CX_WEEK_EMP WE WHERE WE.WEEK_REPORT_ID = R.ROW_ID)		
+		   </if>
+		   
+	</select>
+	
+	<!-- 根据页大小,当前页,员工id,项目id,语言标识,权限标识 获取周报列表 -->
+	
+	<select id="getProjWeekReportList" parameterType="map" resultMap="getProjWeekReportListMap">
+		SELECT R.ROW_ID,
+		       R.PROJECT_ID,
+		       P.NAME,
+		       C.X_EMPLOYEENUM8,
+		       R.ZTE_CREATED,
+		       P.PROJ_NUM,
+		       getlovval('PROJECT_STATUS',P.STATUS_CD)  STATUS_CD,
+		       R.ZTE_WEEK_STATUS,
+		       R.ZTE_WEEK_CODE
+		  FROM CX_PJ_WK_REPORT R, S_PROJ P, S_CONTACT C
+		 WHERE R.PROJECT_ID = P.ROW_ID
+		   AND R.ZTE_CREATED_BY = C.ROW_ID
+		   AND R.ACTIVE_FLAG = 'Y'
+		   AND R.PROJECT_ID = #{prjId}
+		    <if test="permission != 'readable'"> 
+			   AND #{empId} IN
+			       (SELECT EMP_ID FROM CX_WEEK_EMP WE WHERE WE.WEEK_REPORT_ID = R.ROW_ID)		
+		  </if>
+		   
+		   <if test="lstUpd != ''">
+			   	<![CDATA[
+				   AND R.LAST_UPD <= TO_DATE(#{lstUpd}, 'yyyy-MM-dd HH24:mi:ss')		
+			   ]]>
+		   </if>		   
+		   ORDER BY ZTE_CREATED DESC
+	</select>
+	
+	<resultMap type="com.zte.mcrm.project.access.projweekreportlist.vo.ProjWeekReportListVO" id="getProjWeekReportListMap">
+		<result column="ROW_ID" property="id"/>
+		<result column="PROJECT_ID" property="prjId"/>
+		<result column="NAME" property="prjName"/>
+		<result column="X_EMPLOYEENUM8" property="createBy"/>
+		<result column="ZTE_CREATED" property="createDate"/>
+		<result column="PROJ_NUM" property="prjCode"/>
+		<result column="STATUS_CD" property="objStatus"/>	
+		<result column="ZTE_WEEK_STATUS" property="prjStatus"/>
+		<result column="ZTE_WEEK_CODE" property="title"/>
+	</resultMap>
+
+	<!-- 根据员工工号,获取员工Id -->	
+	<select id="getEmpIdByNum" parameterType="String" resultType="String">
+		SELECT U.ROW_ID FROM S_USER U WHERE U.LOGIN = #{empNum}
+	</select>
+</mapper>
+
+
+
+
